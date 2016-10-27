@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MVP.UI.View" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQABEACAgGoAAAQAAADAAiACBAAIAgAAiEgAAgAAAQA=</HashCode>
+      <FileName>UI\View.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MVP.UI.Presenter" HideInheritanceLine="true">
+    <Position X="4.25" Y="3.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAICAAAAABAAAAQIAABAAAAAABAAAAACAUAABAgIAAQ=</HashCode>
+      <FileName>UI\Presenter.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="view" />
+      <Field Name="service" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="model" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="MVP.UI.Model" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6.75" Y="3.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+      <Compartment Name="Events" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAACBAACACAAAAAgAAAAAAQAgAAEAAAgAQAAIAEAAgQ=</HashCode>
+      <FileName>UI\Model.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MVP.UI.Service" Collapsed="true" HideInheritanceLine="true" BaseTypeListCollapsed="true">
+    <Position X="4.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UI\Service.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="MVP.UI.IView">
+    <Position X="2" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgCoAAAAAAAAAACAABAAAAgAAAEAAAAAAAAA=</HashCode>
+      <FileName>UI\IView.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MVP.UI.IService">
+    <Position X="4.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UI\IService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
