@@ -1,5 +1,5 @@
-﻿using DevExpress.XtraEditors.Controls;
-using Moq;
+﻿using Moq;
+using MVP.Events;
 using MVP.UI;
 using NUnit.Framework;
 using System;
@@ -198,7 +198,7 @@ namespace MVP.Tests.UI
             var presenter = new Presenter(viewMock.Object, serviceMock.Object);
 
             // Raising event view.GridValidatingEditor("B", e) to change model
-            var e = new BaseContainerValidateEditorEventArgs(null);
+            var e = new ValidateEditorEventArgs() { Value = null };
             viewMock.Raise(v => v.GridValidatingEditor += null, "B", e);
 
             // Verifing testing results
@@ -215,7 +215,7 @@ namespace MVP.Tests.UI
             var presenter = new Presenter(viewMock.Object, serviceMock.Object);
 
             // Raising event view.GridValidatingEditor("B", e) to change model
-            var e = new BaseContainerValidateEditorEventArgs(string.Empty);
+            var e = new ValidateEditorEventArgs() { Value = string.Empty };
             viewMock.Raise(v => v.GridValidatingEditor += null, "B", e);
 
             // Verifing testing results
@@ -232,7 +232,7 @@ namespace MVP.Tests.UI
             var presenter = new Presenter(viewMock.Object, serviceMock.Object);
 
             // Raising event view.GridValidatingEditor("B", e) to change model
-            var e = new BaseContainerValidateEditorEventArgs("   ");
+            var e = new ValidateEditorEventArgs() { Value = "   " };
             viewMock.Raise(v => v.GridValidatingEditor += null, "B", e);
 
             // Verifing testing results
@@ -249,7 +249,7 @@ namespace MVP.Tests.UI
             var presenter = new Presenter(viewMock.Object, serviceMock.Object);
 
             // Raising event view.GridValidatingEditor("B", e) to change model
-            var e = new BaseContainerValidateEditorEventArgs(0);
+            var e = new ValidateEditorEventArgs() { Value = 0 };
             viewMock.Raise(v => v.GridValidatingEditor += null, "B", e);
 
             // Verifing testing results
@@ -266,7 +266,7 @@ namespace MVP.Tests.UI
             var presenter = new Presenter(viewMock.Object, serviceMock.Object);
 
             // Raising event view.GridValidatingEditor("B", e) to change model
-            var e = new BaseContainerValidateEditorEventArgs("3z12");
+            var e = new ValidateEditorEventArgs() { Value = "3z12" };
             viewMock.Raise(v => v.GridValidatingEditor += null, "B", e);
 
             // Verifing testing results

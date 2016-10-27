@@ -1,30 +1,28 @@
-﻿using DevExpress.XtraEditors.Controls;
+﻿using MVP.Events;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 
 namespace MVP.UI
 {
     public partial class View : Form, IView
     {
-        #region Events Implementation
-
-        public event Action FormLoad;
         public event Action FormClose;
+        public event Action FormLoad;
+        public event Action<string, Model> GridCellValueChanged;
+        public event Action<string, ValidateEditorEventArgs> GridValidatingEditor;
         public event Action<Model> IncreaseAClick;
         public event Action SaveClick;
-        public event Action<string, Model> GridCellValueChanged;
-        public event Action<string, BaseContainerValidateEditorEventArgs> GridValidatingEditor;
-
-        #endregion
-
-        #region View Initialization
 
         public View()
         {
             InitializeComponent();
-
-            if ( !DesignMode )
+            if (!DesignMode)
             {
                 InitEvents();
             }
@@ -33,60 +31,58 @@ namespace MVP.UI
         private void InitEvents()
         {
             this.Load += (s, args) => FormLoad();
-            this.FormClosed += (s, args) => FormClose(); 
+            this.FormClosed += (s, args) => FormClose();
 
             this.increaseAButton.Click += (s, args) => {
                 try
                 {
-                    // Suspend UI grid updates for batch operation. See details on https://documentation.devexpress.com/#WindowsForms/CustomDocument773
-                    gridView1.BeginUpdate();
-                    if (gridView1.IsValidRowHandle(gridView1.FocusedRowHandle))
+                    var row = dataGridView1.CurrentRow;
+                    if (row != null)
                     {
-                        var model = (Model)gridView1.GetRow(gridView1.FocusedRowHandle);
+                        var model = (Model)row.DataBoundItem;
                         IncreaseAClick(model);
                     };
                 }
                 finally
                 {
-                    gridView1.EndUpdate();
                 }
             };
 
             this.saveButton.Click += (s, args) => {
-                gridView1.CloseEditor();
+                dataGridView1.EndEdit();
                 SaveClick();
             };
 
-            this.gridView1.CellValueChanged += (s, args) =>
+            this.dataGridView1.CellValueChanged += (s, args) =>
             {
                 try
                 {
-                    // Suspend UI grid updates for batch operation. See details on https://documentation.devexpress.com/#WindowsForms/CustomDocument773
-                    gridView1.BeginUpdate();
-                    if (gridView1.IsValidRowHandle(gridView1.FocusedRowHandle))
+                    if (args.RowIndex >= 0)
                     {
-                        var model = (Model)gridView1.GetRow(gridView1.FocusedRowHandle);
-                        GridCellValueChanged(args.Column.FieldName, model);
+                        var gridColumn = dataGridView1.Columns[args.ColumnIndex];
+                        var gridRow = dataGridView1.Rows[args.RowIndex];
+                        var model = (Model)gridRow.DataBoundItem;
+                        GridCellValueChanged(gridColumn.DataPropertyName, model);
                     }
                 }
                 finally
                 {
-                    gridView1.EndUpdate();
                 }
             };
 
-            gridView1.ValidatingEditor += (s, args) => GridValidatingEditor(gridView1.FocusedColumn.FieldName, args);
+            dataGridView1.CellValidating += (s, args) =>
+            {
+                var gridColumn = dataGridView1.Columns[args.ColumnIndex];
+                object value = dataGridView1.CurrentCell.Value;
+                value = dataGridView1.Rows[args.RowIndex].Cells[args.ColumnIndex];
+                var eventArgs = new ValidateEditorEventArgs() { Valid = true, ErrorText = string.Empty, Value = value };
+                GridValidatingEditor(gridColumn.DataPropertyName, eventArgs);
+
+                dataGridView1.Rows[args.RowIndex].Cells[args.ColumnIndex].ErrorText = eventArgs.ErrorText;
+                args.Cancel = !eventArgs.Valid;
+            };
 
         }
-
-        private void gridView1_InvalidValueException(object sender, InvalidValueExceptionEventArgs e)
-        {
-            e.ExceptionMode = ExceptionMode.DisplayError;
-        }
-
-        #endregion
-
-        #region IView implementation
 
         public void BindModel(BindingList<Model> model)
         {
@@ -98,9 +94,10 @@ namespace MVP.UI
             MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        #endregion
-
-
-
+        private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            MessageBox.Show(e.Exception.Message);
+            e.ThrowException = false;
+        }
     }
 }

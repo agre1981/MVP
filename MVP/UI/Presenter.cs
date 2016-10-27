@@ -1,6 +1,7 @@
-﻿using DevExpress.XtraEditors.Controls;
+﻿using MVP.Events;
 using System;
 using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace MVP.UI
 {
@@ -91,7 +92,7 @@ namespace MVP.UI
             }
         }
 
-        private void view_GridValidatingEditor(string fieldName, BaseContainerValidateEditorEventArgs e)
+        private void view_GridValidatingEditor(string fieldName, ValidateEditorEventArgs e)
         {
             if(fieldName == "B")
             {

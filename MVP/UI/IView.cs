@@ -1,4 +1,4 @@
-﻿using DevExpress.XtraEditors.Controls;
+﻿using MVP.Events;
 using System;
 using System.ComponentModel;
 
@@ -11,7 +11,7 @@ namespace MVP.UI
         event Action<Model> IncreaseAClick;
         event Action SaveClick;
         event Action<string, Model> GridCellValueChanged;
-        event Action<string, BaseContainerValidateEditorEventArgs> GridValidatingEditor;
+        event Action<string, ValidateEditorEventArgs> GridValidatingEditor;
 
         void BindModel(BindingList<Model> model);
         void ShowErrorMessage(string message);
