@@ -1,7 +1,13 @@
 # MVP Pattern Recommendations for C# (.NET)
 
-## 1. Overview MVP
+## 1. Overview
+The main reason for separating view and logic is unit testing.
 
+There are many patterns for separating view and logic (MVC, MVP, MVVM or even MVP-VM). Comparison is not subject of the article and i just note main advantages of MVP:
+* MVP is very simple pattern.
+* MVP allows testing more than other patterns and tests are more clear.
+
+Classical MVP is too abstract pattern. Real implementation generally has more than 3 participants. This article is practical guide for using and testing of MVP.
 
 ## 2. Class Diagram
 
@@ -159,7 +165,7 @@ View1.SomeMethod()
 
 ## 13. Example of implementation 
 
-checkout https://github.com/agre1981/MVP
+  https://github.com/agre1981/MVP
 
   
 
