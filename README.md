@@ -16,11 +16,11 @@ Classical MVP is too abstract pattern. Real implementation generally has more th
 ## 3. Sequencing diagram
 *	**Presenter** communicates with **view** directly
   
-![Sequence Diagram] (https://github.com/agre1981/MVP/blob/master/docs/img/mvp-seqdiagram-1.png)
+![Sequence Diagram](https://github.com/agre1981/MVP/blob/master/docs/img/mvp-seqdiagram-1.png)
   
 *	**Presenter** communicates with **view** within **Model (using binding)**
   
-![Sequence Diagram] (https://github.com/agre1981/MVP/blob/master/docs/img/mvp-seqdiagram-2.png)
+![Sequence Diagram](https://github.com/agre1981/MVP/blob/master/docs/img/mvp-seqdiagram-2.png)
   
 ## 4. MVP binding:
   * **Inside view**
@@ -79,7 +79,7 @@ void Presenter.DoSomething()
 ## 9.	Using Services.
 * Class diagram
 
-![Sequence Diagram] (https://github.com/agre1981/MVP/blob/master/docs/img/mvp-service.png)
+![Sequence Diagram](https://github.com/agre1981/MVP/blob/master/docs/img/mvp-service.png)
 
 * Binding:
 ```
@@ -138,7 +138,7 @@ view.Show();
 * Interaction of several views. 
   * Class diagram:
   
-![Sequence Diagram] (https://github.com/agre1981/MVP/blob/master/docs/img/mvp-classdiagram-complex.png)
+![Sequence Diagram](https://github.com/agre1981/MVP/blob/master/docs/img/mvp-classdiagram-complex.png)
 
   * Main view interacts with child within public contract of child view.
 ```
