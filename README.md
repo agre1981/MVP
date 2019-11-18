@@ -5,7 +5,7 @@ The main reason for separating view and logic is unit testing.
 
 There are many patterns for separating view and logic (MVC, MVP, MVVM or even MVP-VM). Comparison is not subject of the article and i just note main advantages of MVP:
 * MVP is very simple pattern.
-* MVP allows testing more than other patterns and tests are more clear.
+* MVP allows to test more than other patterns and tests are more clear.
 
 Classical MVP is too abstract pattern. Real implementation generally has more than 3 participants. This article is practical guide for using and testing of MVP.
 
